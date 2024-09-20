@@ -2,4 +2,11 @@
 /terraform/.terraform.lock.hcl
 /terraform/*-keypair*
 
-app/__pycache__/
+app/config.py
+app/consts.py
+
+**/__pycache__/**
+
+# 以下、使わなくなったのでgithubにはあげない
+/terraform/
+/.circleci/
