@@ -1,2 +1,4 @@
 # qiita_hackathon_2024_backend
-qiita_hackathon_2024_backend
+
+基本的にローカルでの開発は想定していない。
+コード変更後はサーバにアップロードしてブラウザ等からアクセスできるかを確認する必要あり。

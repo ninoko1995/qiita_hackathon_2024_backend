@@ -1,12 +1,26 @@
-from flask import Flask
-from flask_cors import CORS
+#!/home/miyablo/.pyenv/versions/3.7.0/bin/python
+# -*- coding: utf-8 -*-
+from flask import Flask, jsonify
+from apis.sample import sample_module
 
 app = Flask(__name__)
-CORS(app)
+app.config['JSON_AS_ASCII'] = False
 
-@app.route('/')
+@app.route('/', methods=['GET'])
+def root():
+    response_data = {}
+    response_data["status"] = "200"
+    response_data["message"] = "running"
+    return(jsonify(response_data))
+
+@app.route('/hello', methods=['GET'])
 def hello():
-    return "Hello, World!"
+    response_data = {}
+    response_data["status"] = "200"
+    response_data["message"] = "Hello World!"
+    return(jsonify(response_data))
+
+app.register_blueprint(sample_module)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run()
