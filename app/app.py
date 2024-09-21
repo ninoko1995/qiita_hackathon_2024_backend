@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, jsonify
 from apis.sample import sample_module
+from apis.spaces import spaces_module
+from apis.users import users_module
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -21,6 +23,8 @@ def hello():
     return(jsonify(response_data))
 
 app.register_blueprint(sample_module)
+app.register_blueprint(spaces_module)
+app.register_blueprint(users_module)
 
 if __name__ == '__main__':
     app.run()
