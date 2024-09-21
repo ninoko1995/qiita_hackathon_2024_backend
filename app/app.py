@@ -1,12 +1,14 @@
 #!/home/miyablo/.pyenv/versions/3.7.0/bin/python
 # -*- coding: utf-8 -*-
 from flask import Flask, jsonify
+from flask_cors import CORS
 from apis.sample import sample_module
 from apis.spaces import spaces_module
 from apis.users import users_module
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
+CORS(app) # アプリ全体でCORSを有効にする
 
 @app.route('/', methods=['GET'])
 def root():

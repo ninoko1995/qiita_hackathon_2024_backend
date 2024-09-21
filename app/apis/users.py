@@ -9,29 +9,37 @@ users_module = Blueprint("users", __name__)
 @users_module.route('/signup', methods=['POST'])
 def signup():
     try:
+        if request.get_json()["user"]["email"] == "" or request.get_json()["user"]["password"] == "":
+            raise Exception("email or password must not be empty")
         posted_user = request.get_json()["user"]
-        UsersRepository().create(posted_user) # emailとpasswordを受け取ってDBに保存
-        UsersRepository().update(posted_user) # nickname, interested_in, twitter_screenname, iconを受け取ってDBに保存
+        user_id = UsersRepository().create(posted_user)
     except Exception as e:
         return(set_data_and_create_response("500", str(e)))
 
     response_data = {}
     response_data["message"] = 'successfully signed up'
     response_data["status"] = "200"
+    response_data['data'] = { "user_id": user_id }
     
     return(create_response(response_data))
 
 
-@users_module.route('/login', methods=['PATCH'])
+@users_module.route('/login', methods=['POST'])
 def login():
     try:
-        user =  UsersRepository().show()
+        posted_user = request.get_json()["user"]
+        is_success =  UsersRepository().check_login(posted_user["email"], posted_user["password"])
+        if is_success:
+            user_id = UsersRepository().fetch_user_id_by_email(posted_user["email"])
+        else:
+            raise Exception("email or password is wrong")
     except Exception as e:
         return(set_data_and_create_response("500", str(e)))
 
     response_data = {}
     response_data["message"] = 'successfully logged in'
     response_data["status"] = "200"
+    response_data['data'] = { "user_id": user_id }
     
     return(create_response(response_data))
 
