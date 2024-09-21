@@ -8,7 +8,8 @@ class MysqlRepository:
             host=config.HOST,
             user=config.USER,
             password=config.PASSWORD,
-            database=config.DATABASE
+            database=config.DATABASE,
+            charset='utf8mb4'
         )
         self.cur = self.client.cursor(dictionary=True)
 

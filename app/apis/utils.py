@@ -16,7 +16,7 @@ def json_serial(obj):
 
 # JsonでかつUTF-8の文字コードで、レスポンスを返す
 def create_response(response_data):
-    response = make_response(json.dumps(response_data, default=json_serial))
+    response = make_response(json.dumps(response_data, default=json_serial, ensure_ascii=False))
     response.headers.add('Content-Type', 'application/json; charset=UTF-8')
     return response
 
