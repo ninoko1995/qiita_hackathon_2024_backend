@@ -74,6 +74,7 @@ class SpacesRepository(MysqlRepository):
                             users.icon as icon,
                             users.nickname as nickname,
                             users.interested_in as interested_in,
+                            users.twitter_screenname as twitter_screenname,
                             space_users.status as status,
                             space_users.uid as uid
                         FROM
